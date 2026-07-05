@@ -11,7 +11,6 @@
  * - Does NOT create directories (caller is responsible).
  */
 
-import { randomBytes } from "node:crypto";
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 
 /**
@@ -33,7 +32,7 @@ export function atomicAppend(filePath: string, line: string): void {
 
 		// 3. Write to a temp file in the same directory
 		const pid = process.pid;
-		const random = randomBytes(4).toString("hex");
+		const random = Math.random().toString(36).slice(2, 10);
 		const tmpPath = `${filePath}.tmp.${pid}.${random}`;
 
 		writeFileSync(tmpPath, content, "utf-8");

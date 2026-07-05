@@ -114,8 +114,8 @@ append(eventType, details, overrides?) → void
 | Field | Type | Description |
 |-------|------|-------------|
 | `overrides.timestamp` | `string` | Override the `timestamp` field. If omitted, the sink auto-generates one (`new Date().toISOString()` at append time). |
-| `overrides.sessionId` | `string` | Override `sessionId` for this event. An `undefined` value falls back to the creation-time `sessionId`. If neither is provided, the field is written as `undefined`. |
-| `overrides.workspace` | `string` | Override `workspace` for this event. An `undefined` value falls back to the creation-time `workspace`. If neither is provided, the field is written as `undefined`. |
+| `overrides.sessionId` | `string` | Override `sessionId` for this event. An `undefined` value falls back to the creation-time `sessionId`. If neither is provided, the field defaults to an empty string `""`. |
+| `overrides.workspace` | `string` | Override `workspace` for this event. An `undefined` value falls back to the creation-time `workspace`. If neither is provided, the field defaults to an empty string `""`. |
 
 #### Behavior
 
