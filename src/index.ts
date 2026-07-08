@@ -49,6 +49,10 @@ export interface EventSink {
 export function createEventSink(options: EventSinkOptions): EventSink {
 	const absDir = resolve(options.statsDir);
 	const filePath = join(absDir, "events.jsonl");
+	const defaults = {
+		...(options.sessionId ? { sessionId: options.sessionId } : {}),
+		...(options.workspace ? { workspace: options.workspace } : {}),
+	};
 
 	// Create directory tree — failures are caught by append() at write time
 	try {
@@ -74,11 +78,8 @@ export function createEventSink(options: EventSinkOptions): EventSink {
 					namespace: options.namespace,
 					eventType,
 					details,
-					defaults: {
-						sessionId: options.sessionId,
-						workspace: options.workspace,
-					},
-					overrides,
+					defaults,
+					...(overrides ? { overrides } : {}),
 				});
 
 				const line = JSON.stringify(event);
